@@ -9,23 +9,25 @@ function AuthPage() {
     let acccess_token = localStorage.getItem('access_token');
     let name;
     let pass;
-    let headers = {'Authorization': 'Bearer ' + acccess_token};
+    let headers = { 'Authorization': 'Bearer ' + acccess_token };
 
-    const url = 'http://localhost:3000/auth/login?nickname=' + name + '&password=' + pass;
+    let baseUrl = 'http://localhost:3000/';
 
-    const getHash = () => {
-        axios.post(url)
+    const getHash = (name, pass) => {
+        axios.post(baseUrl + '/auth/login?nickname=' + name + '&password=' + pass)
             .then(response => {
-                //localStorage.setItem('access_token', response.data.acccess_token);
-                console.log(response);
+                localStorage.setItem('access_token', response.data.acccess_token);
+                localStorage.setItem('username', response.data.username);
+                localStorage.setItem('role', response.data.role);
+                console.log(localStorage.data)
             });
     };
-    
+
     const setDataHandler = () => {
         name = document.getElementById('login_name').value
         pass = document.getElementById('login_pass').value
 
-        getHash()
+        getHash(name, pass)
     }
 
     return (
@@ -35,8 +37,8 @@ function AuthPage() {
                 <form method="post">
                     <input id="login_name" type="text" name="u" placeholder="Username" required="required" />
                     <input id="login_pass" type="password" name="p" placeholder="Password" required="required" />
-                    <div className="btn btn-primary btn-block btn-large" 
-                            onClick={setDataHandler}> Log In</div>
+                    <div className="btn btn-primary btn-block btn-large"
+                        onClick={setDataHandler}> Log In</div>
                 </form>
             </div>
             <div class="login">
