@@ -16,18 +16,39 @@ function AuthPage() {
     const getHash = (name, pass) => {
         axios.post(baseUrl + '/auth/login?nickname=' + name + '&password=' + pass)
             .then(response => {
-                localStorage.setItem('access_token', response.data.acccess_token);
+                localStorage.setItem('access_token', response.data.access_token);
                 localStorage.setItem('username', response.data.username);
                 localStorage.setItem('role', response.data.role);
-                console.log(localStorage.data)
+
+                const a = {
+                    "access_token": localStorage.getItem('access_token'),
+                    "username": localStorage.getItem('username'),
+                    "role": localStorage.getItem('role')
+                }
+
+                console.log(a)
             });
-    };
+    }
 
     const setDataHandler = () => {
         name = document.getElementById('login_name').value
         pass = document.getElementById('login_pass').value
 
         getHash(name, pass)
+    }
+
+    const sendData = () => {
+        sendName = document.getElementById('register_name').value
+        sendPass = document.getElementById('register_pass').value
+
+        axios.post(baseUrl + '/auth/registration?nickname=' + sendName + '&password=' + sendPass)
+            .then(response => {
+                if (response.statusCode === 409) {
+                    console.log('Заебись')
+                } else {
+                    console.log('Акк не создан')
+                }
+            });
     }
 
     return (
@@ -44,9 +65,10 @@ function AuthPage() {
             <div class="login">
                 <h1>Register</h1>
                 <form method="post">
-                    <input type="text" name="u" placeholder="Username" required="required" />
-                    <input type="password" name="p" placeholder="Password" required="required" />
-                    <button className="btn btn-primary btn-block btn-large">Register</button>
+                    <input id="register_name" type="text" name="u" placeholder="Username" required="required" />
+                    <input id="register_pass" type="password" name="p" placeholder="Password" required="required" />
+                    <div className="btn btn-primary btn-block btn-large"
+                        onClick={sendData}>Register</div>
                 </form>
             </div>
         </div>
