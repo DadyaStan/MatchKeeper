@@ -1,8 +1,10 @@
+import { useState } from "react";
+import axios from 'axios';
+
 import './AuthPage.scss';
 
-
-
 function AuthPage() {
+
     return (
         <div className='auth-box'>
             <div class="login">
@@ -10,7 +12,7 @@ function AuthPage() {
                 <form method="post">
                     <input type="text" name="u" placeholder="Username" required="required" />
                     <input type="password" name="p" placeholder="Password" required="required" />
-                    <button class="btn btn-primary btn-block btn-large">Let me in.</button>
+                    <button className="btn btn-primary btn-block btn-large">Log In</button>
                 </form>
             </div>
             <div class="login">
@@ -18,8 +20,7 @@ function AuthPage() {
                 <form method="post">
                     <input type="text" name="u" placeholder="Username" required="required" />
                     <input type="password" name="p" placeholder="Password" required="required" />
-                    <input type="password" name="p" placeholder=" Repeat Password" required="required" />
-                    <button class="btn btn-primary btn-block btn-large">Register</button>
+                    <button className="btn btn-primary btn-block btn-large">Register</button>
                 </form>
             </div>
         </div>
