@@ -7,9 +7,9 @@
 
 function TournamentPage() {
     return (
-        <div>
-            Tournament
-        </div>
+        <h2>
+            ТУРНИРНАЯ СТРАНИЦА (тест)
+        </h2>
     )
 }
 

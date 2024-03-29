@@ -7,9 +7,9 @@
 
 function TablePage() {
     return (
-        <div>
-            Table
-        </div>
+        <h2>
+            ТАБЛИЦЫ
+        </h2>
     )
 }
 

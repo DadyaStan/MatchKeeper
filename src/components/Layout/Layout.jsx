@@ -5,8 +5,10 @@ import Header from "../Header/HeaderComponent";
 function Layout() {
     return (
         <div>
-            <Header />
-            <Outlet />
+            <div className="container">
+                <Header />
+                <Outlet />
+            </div>
         </div>
     );
 }

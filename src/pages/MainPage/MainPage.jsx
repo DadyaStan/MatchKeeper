@@ -6,9 +6,9 @@
 
 function MainPage() {
     return (
-        <div>
-            Main
-        </div>
+        <h2>
+            ОСНОВНАЯ СТРАНИЦА
+        </h2>
     )
 }
 
