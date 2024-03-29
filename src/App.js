@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+
+import AuthPage from './pages/AuthPage/AuthPage';
+import MainPage from './pages/MainPage/MainPage';
+import TablePage from './pages/TablePage/TablePage';
+import TournamentPage from './pages/TournamentPage/TournamentPage';
+
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<MainPage />} />
+          <Route path='auth' element={<AuthPage />}/>
+          <Route path='table' element={<TablePage />}/>
+          <Route path='tournament' element={<TournamentPage />}/>
+          {/* Not found page will be */}
+        </Route>
+      </Routes>
     </div>
   );
 }
