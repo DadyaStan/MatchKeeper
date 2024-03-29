@@ -11,14 +11,18 @@ function AuthPage() {
     let pass;
     let headers = { 'Authorization': 'Bearer ' + acccess_token };
 
-    let baseUrl = 'http://localhost:3000/';
+    let baseUrl = 'http://localhost:3000';
 
     const getHash = (name, pass) => {
         axios.post(baseUrl + '/auth/login?nickname=' + name + '&password=' + pass)
-            .then(response => {
-                localStorage.setItem('access_token', response.data.access_token);
-                localStorage.setItem('username', response.data.username);
-                localStorage.setItem('role', response.data.role);
+            .then(response => { 
+                if (response.statusCode === 401) {
+                    alert('Неверный пароль или логин')
+                } else {
+                    localStorage.setItem('access_token', response.data.access_token);
+                    localStorage.setItem('username', response.data.username);
+                    localStorage.setItem('role', response.data.role);
+                }
 
                 const a = {
                     "access_token": localStorage.getItem('access_token'),
@@ -41,11 +45,11 @@ function AuthPage() {
         let sendName = document.getElementById('register_name').value
         let sendPass = document.getElementById('register_pass').value
 
-        axios.post(baseUrl + '/auth/registration?nickname=' + sendName + '&password=' + sendPass)
+        axios.post(baseUrl + 'auth/registration?nickname=' + sendName + '&password=' + sendPass)
             .then(response => {
-                if (response.statusCode === 409) {
+                if (response.statusCode === 201) {
                     console.log('Заебись')
-                } else {
+                } else if (response.statusCode === 409) {
                     console.log('Акк не создан')
                 }
             });
@@ -59,7 +63,7 @@ function AuthPage() {
                     <input id="login_name" type="text" name="u" placeholder="Username" required="required" />
                     <input id="login_pass" type="password" name="p" placeholder="Password" required="required" />
                     <div className="btn btn-primary btn-block btn-large"
-                        onClick={setDataHandler}> Log In</div>
+                        onClick={setDataHandler}>Log In</div>
                 </form>
             </div>
             <div class="login">
