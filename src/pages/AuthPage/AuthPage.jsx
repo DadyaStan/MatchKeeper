@@ -38,8 +38,8 @@ function AuthPage() {
     }
 
     const sendData = () => {
-        sendName = document.getElementById('register_name').value
-        sendPass = document.getElementById('register_pass').value
+        let sendName = document.getElementById('register_name').value
+        let sendPass = document.getElementById('register_pass').value
 
         axios.post(baseUrl + '/auth/registration?nickname=' + sendName + '&password=' + sendPass)
             .then(response => {
