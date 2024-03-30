@@ -8,15 +8,23 @@ import React from "react";
 import { useState } from "react";
 import axios from 'axios';
 
+import './TablePage.scss';
+
 class TablePage extends React.Component {
     tournaments = [];
+
+    renderTable() {
+
+    }
 
     componentWillMount() {
         axios.get('http://localhost:3000/tournaments')
             .then(response => {
-                for (let i = 0; i < response.lenght; i++) {
-                    this.tournaments.push(response[i]);
-                    console.log(response[i]);
+                for (let i = 0; i < response.data.lenght; i++) {
+                    this.tournaments.push(response.data[i]);
+                    console.log(response.data[i]);
+
+                    this.renderTable();
                 }
             });
     }
@@ -28,7 +36,9 @@ class TablePage extends React.Component {
                     ТАБЛИЦЫ
                 </h2>
                 <div className="table">
-                    CONTENT
+                    {Object.entries(this.tournaments).map(([key, value]) => (
+                        <li key={key}>{value.playersIds}, {value.status}</li>
+                    ))}
                 </div>
             </div>
         )
